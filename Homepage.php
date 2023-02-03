@@ -14,7 +14,7 @@
         
         <p>
             Access For All
-            Main site
+            Main homepage
         </p>
 
 
