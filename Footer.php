@@ -1,7 +1,7 @@
 
     <footer  class="border-top footer text-muted">
             <div class="container">
-                &copy; Ferbruary 2023 - Edited by Waris Ali
+                &copy; February 2023 - Edited by Waris Ali
             </div>
     </footer>
 
