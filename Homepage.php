@@ -1,30 +1,47 @@
-<?php require("NavigationBar.php");
+<?php include("NavigationBar.php");
 
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>A HUGE Welcome From Access For All</title>
+  <style>
+    /* Add styles for a visually appealing homepage */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f2f2f2;
+    }
 
-	<div class="container bgColor">
-        	<main role="main" class="pb-3">
-            <head>
-<link href="site.css" rel="stylesheet" type="text/css" />
+    h1 {
+      font-size: 36px;
+      margin-top: 50px;
+    }
+
+    .btn {
+      background-color: blue;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      margin-top: 20px;
+    }
+  </style>
 </head>
-<div class="container pb-5">
-    <main role="main" class="pb-3">
-        <body class="bgColor">
-        <h2>Welcome!</h2><br>
-        
-        <p>
-            Access For All
-            Testing testing
-        </p>
-
-
-    </main>
-</div>
-
-
+<body>
+  <h1>A HUGE Welcome From Access For All</h1>
+  <p>We are committed to creating a welcoming environment for everyone, including those with accessibility needs. </p>
+  <a href="SelfAudit.php" class="btn">Proceed to the Audit</a>
+  <br>
+  <br>
+  <a href="details.php" class="btn">Check a Location</a>
+  <br>
+  <br>
+  <br>
 </body>
-		</main>
-	</div>
+</html>
+
+
 
 <?php require("Footer.php");?>
 

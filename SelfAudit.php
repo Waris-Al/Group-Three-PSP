@@ -1,4 +1,5 @@
 <?php include("NavigationBar.php");
+$totalQs=10;
 ?>
 
 <!DOCTYPE html>
@@ -28,22 +29,7 @@
 <body>
 
 
-<select id="test" name="form_select" onchange="showDiv(this)">
-   <option value="0">No</option>
-   <option value="1">Yes</option>
-</select>     
 
-<script type="text/javascript">
-  var totalQuestions = 10;
-function showDiv(select){
-   if(select.value==1){
-    document.getElementById('hidden_fornow').style.display = "block";
-    totalQuestions=totalQuestions+2;
-   } else{
-    document.getElementById('hidden_fornow').style.display = "none";
-   }
-} 
-</script>
 
   <h1>10 Point Checklist</h1>
   <form action="ActionPlan.php" method="get">
@@ -61,9 +47,17 @@ function showDiv(select){
       <li>Information on concession available <input type='radio' id='task-7-yes' name='task-7' value='yes'>Yes<input type='radio' id='task-7-no' name='task-7' value='no'>No</li>
       <li>Adjustable text/contrast on the website <input type='radio' id='task-8-yes' name='task-8' value='yes'>Yes<input type='radio' id='task-8-no' name='task-8' value='no'>No</li>
       <li>Accessible On-Site Parking <input type='radio' id='task-9-yes' name='task-9' value='yes'>Yes<input type='radio' id='task-9-no' name='task-9' value='no'>No</li>   
-      <ul id="hidden_fornow" style="display:none;">
-      <li>Hidden question <input type='radio' id='task-10-yes' name='task-10' value='yes'>Yes<input type='radio' id='task-10-no' name='task-10' value='no'>No</li>
-      <li>Hidden question 2<input type='radio' id='task-11-yes' name='task-11' value='yes'>Yes<input type='radio' id='task-11-no' name='task-11' value='no'>No</li>
+      
+      <?php $testingtesting = "Cinema"; ?>
+      <ul id="hidden_fornow" <?php if ($testingtesting == "Cinema") { echo 'style="display:block;"'; $totalQs = 12; } else { echo 'style="display:none;"'; } ?>>
+        <li>Hidden question <input type='radio' id='task-10-yes' name='task-10' value='yes'>Yes<input type='radio' id='task-10-no' name='task-10' value='no'>No</li>
+        <li>Hidden question 2<input type='radio' id='task-11-yes' name='task-11' value='yes'>Yes<input type='radio' id='task-11-no' name='task-11' value='no'>No</li>
+      </ul>
+
+      <ul id="hidden2" style="display:none;">
+      <li>Hidden question 3<input type='radio' id='task-12-yes' name='task-12' value='yes'>Yes<input type='radio' id='task-12-no' name='task-12' value='no'>No</li>
+      <li>Hidden question 4<input type='radio' id='task-13-yes' name='task-13' value='yes'>Yes<input type='radio' id='task-13-no' name='task-13' value='no'>No</li>
+      </ul>
       
       <input type="hidden" name="totalQuestions" value="">
     </ul>
@@ -83,7 +77,7 @@ function showDiv(select){
     $(document).ready(function() {
       $(':radio').change(function() {
         var totalChecked = $(':radio:checked').length;
-        var percentage = (totalChecked / totalQuestions) * 100;
+        var percentage = (totalChecked / <?php echo $totalQs; ?>) * 100;
         $('.progress-bar').css('width', percentage + '%');
         $('.progress-bar').text(percentage + '%');
         $('.progress-bar').attr('aria-valuenow', percentage);
@@ -94,10 +88,10 @@ function showDiv(select){
 
 $(':radio').change(function() {
   var totalChecked = $(':radio:checked').length;
-  if (totalChecked == totalQuestions) {
+  if (totalChecked == <?php echo $totalQs; ?>) {
     $('#submit-btn').attr('disabled', false);
     
-document.querySelector('input[name="totalQuestions"]').value = totalQuestions;
+document.querySelector('input[name="totalQuestions"]').value = <?php echo $totalQs; ?>;
   } else {
     $('#submit-btn').attr('disabled', true);
   }
@@ -108,9 +102,4 @@ document.querySelector('input[name="totalQuestions"]').value = totalQuestions;
 </body>
 </html>
 
-<?php include("Footer.php") 
-
-//
-
-?>
-
+<?php include("Footer.php");?>
