@@ -1,11 +1,14 @@
 <?php
+$totalNos = 0;
+$totalQuestions = $_GET['totalQuestions'];
 $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
-for ($i=0; $i < 10; $i++)
+for ($i=0; $i < $totalQuestions; $i++)
 {
 $task = "task-";
 $testString = $task . strval($i);
 if ($_GET["$testString"]=="no")
 {
+$totalNos++;
   $stmt = $db->prepare("SELECT ActionPoint FROM Action WHERE taskNo = '$testString'");
   $result = $stmt->execute();
 
@@ -18,11 +21,14 @@ if ($_GET["$testString"]=="no")
 
   foreach ($rows_array as $value)
 {
-    echo $value['ActionPoint'] . "<br>";
+    echo "•" . $value['ActionPoint'] . "<br>";
 }
   
 }
 }
+
+$totalPercent = (100-($totalNos/$totalQuestions)*100);
+echo "Your overall Accessibility Score is $totalPercent %";
   /*
   <?php 
  function verifyCustomer () {
