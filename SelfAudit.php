@@ -1,4 +1,4 @@
-<?php include("NavigationBar.php") ?>
+<?php include("NavigationBar.php");?>
 
 <!DOCTYPE html>
 <html>
@@ -26,7 +26,7 @@
 </head>
 <body>
   <h1>10 Point Checklist</h1>
-  <form>
+  <form action="Testing.php" method="get">
     <ul>
       <li>Accessibility Tab on the Homepage
       <input type='radio' id='task-0-yes' name='task-0' value='yes'>Yes
@@ -40,9 +40,9 @@
       <li>Wi-Fi code displayed <input type='radio' id='task-6-yes' name='task-6' value='yes'>Yes<input type='radio' id='task-6-no' name='task-6' value='no'>No</li>
       <li>Information on concession available <input type='radio' id='task-7-yes' name='task-7' value='yes'>Yes<input type='radio' id='task-7-no' name='task-7' value='no'>No</li>
       <li>Adjustable text/contrast on the website <input type='radio' id='task-8-yes' name='task-8' value='yes'>Yes<input type='radio' id='task-8-no' name='task-8' value='no'>No</li>
-      <li>Accessible On-Site Parking <input type='radio' id='task-9-yes' name='task-9' value='yes'>Yes<input type='radio' id='task-9-no' name='task-9' value='no'>No</li>
-         
+      <li>Accessible On-Site Parking <input type='radio' id='task-9-yes' name='task-9' value='yes'>Yes<input type='radio' id='task-9-no' name='task-9' value='no'>No</li>   
     </ul>
+    <input type="submit" id="submit-btn" value="Submit" name="Submit">
   </form>
 
  
@@ -62,25 +62,21 @@
         $('.progress-bar').css('width', percentage + '%');
         $('.progress-bar').text(percentage + '%');
         $('.progress-bar').attr('aria-valuenow', percentage);
-
-        if ($('input[name="task-0"]:checked').val() === "yes") 
-        { <?php $file = fopen("ActionPlan.txt", "a");
-            fwrite($file, "Add accessibility tab to website\n");
-            fclose($file); ?>}
-
-        if ($('input[name="task-1"]:checked').val() === "yes") 
-        {<?php $file = fopen("ActionPlan.txt", "a");
-            fwrite($file, "Add videos to website\n");
-            fclose($file);
-
-            //This is gonna be changed so that after submitting
-            //go through each task, if its filled in yes, search through DB to find action point and add it to list
-            //possibly change this so the action point is live?
-            ?>}
-
-
       });
     });
+
+
+
+    $('#submit-btn').attr('disabled', true);
+
+$(':radio').change(function() {
+  var totalChecked = $(':radio:checked').length;
+  if (totalChecked == 10) {
+    $('#submit-btn').attr('disabled', false);
+  } else {
+    $('#submit-btn').attr('disabled', true);
+  }
+});
   </script>
 </body>
 </html>
