@@ -1,4 +1,6 @@
 <?php
+require('fpdf/multicellmax.php');
+$endText = "";
 $totalNos = 0;
 $totalQuestions = $_GET['totalQuestions'];
 $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
@@ -21,7 +23,7 @@ $totalNos++;
 
   foreach ($rows_array as $value)
 {
-    echo "•" . $value['ActionPoint'] . "<br>";
+    $endText.= "-" . $value['ActionPoint'] . "\n";
 }
   
 }
@@ -29,6 +31,15 @@ $totalNos++;
 
 $totalPercent = (100-($totalNos/$totalQuestions)*100);
 $totalPercent = round($totalPercent, 1);
+
+
+$pdf=new PDF();
+$pdf->AddPage();
+$pdf->SetFont('Arial','',10);
+$txt=$pdf->MultiCell(100,5,$endText,0,'J',0,$totalQuestions);
+$pdf->Output();
+
+
 echo "Your overall Accessibility Score is $totalPercent %";
   /*
   //C:\xampp\htdocs\Group-Three-PSP
