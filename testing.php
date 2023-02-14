@@ -1,5 +1,5 @@
 <?php include("NavigationBar.php");
-$totalQs=10;
+$lastQ=10;
 ?>
 
 <!DOCTYPE html>
@@ -30,12 +30,33 @@ $totalQs=10;
 
 
 <?php 
+function getQs()
+{
+    $venueType = "Cinema";
+  $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
+  $stmt = $db->prepare("SELECT * FROM Checklist WHERE QuestionNo LIKE 'Q%' AND (Venue = 'General' OR Venue = '$venueType') ORDER BY CAST(SUBSTR(QuestionNo, 2) AS UNSIGNED) DESC LIMIT 1");
+  $result = $stmt->execute();
+  
+  $arrayResult = [];//prepare an empty array first
+  while ($row = $result->fetchArray()){ // use fetchArray(SQLITE3_NUM) - another approach
+      $arrayResult [] = $row; //adding a record until end of records
+  }
+  return $arrayResult;
+}
+$lastQ = substr((getQs())[0]['QuestionNo'], 1);
+$lastQ= $lastQ+1;
+
+
+
 function getQuestion($questnum)
 {
+    
+$venueType = "Cinema";
 $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
 
-  $stmt = $db->prepare("SELECT Question FROM Checklist WHERE QuestionNo = '$questnum'");
+  $stmt = $db->prepare("SELECT Question FROM Checklist WHERE QuestionNo = '$questnum' AND (Venue = 'General' OR Venue = '$venueType')");
   $result = $stmt->execute();
+  
 
 
   $rows_array = [];
@@ -48,13 +69,14 @@ $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
 ?>
 <?php
 
-    for ($i=1; $i<11; $i++):
+    for ($i=1; $i<$lastQ; $i++):
         $testString = "Q" . $i;
 ?>
 
 <form action="ActionPlan.php" method="get">
 <li>
-<?php $totalQs=10;
+<?php 
+$totalQ = $i;
 $first_element = reset(getQuestion($testString)[0]); echo (implode(',', array($first_element))); 
 $idYes = "Q" . $i . "-yes";
 $idNo = "Q" . $i . "-no";
@@ -80,7 +102,7 @@ $idNo = "Q" . $i . "-no";
     $(document).ready(function() {
       $(':radio').change(function() {
         var totalChecked = $(':radio:checked').length;
-        var percentage = (totalChecked / <?php echo $totalQs; ?>) * 100;
+        var percentage = (totalChecked / <?php echo $totalQ; ?>) * 100;
         $('.progress-bar').css('width', percentage + '%');
         $('.progress-bar').text(percentage + '%');
         $('.progress-bar').attr('aria-valuenow', percentage);
@@ -91,10 +113,10 @@ $idNo = "Q" . $i . "-no";
 
 $(':radio').change(function() {
   var totalChecked = $(':radio:checked').length;
-  if (totalChecked == <?php echo $totalQs; ?>) {
+  if (totalChecked == <?php echo $totalQ; ?>) {
     $('#submit-btn').attr('disabled', false);
     
-document.querySelector('input[name="totalQuestions"]').value = <?php echo $totalQs; ?>;
+document.querySelector('input[name="totalQuestions"]').value = <?php echo $totalQ; ?>;
   } else {
     $('#submit-btn').attr('disabled', true);
   }
