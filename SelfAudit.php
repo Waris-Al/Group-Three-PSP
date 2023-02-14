@@ -29,34 +29,45 @@ $totalQs=10;
 <body>
 
 
+<?php 
+function getQuestion($questnum)
+{
+$db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
+
+  $stmt = $db->prepare("SELECT Question FROM Checklist WHERE QuestionNo = '$questnum'");
+  $result = $stmt->execute();
+
+
+  $rows_array = [];
+  while ($row=$result->fetchArray())
+  {
+      $rows_array[]=$row;
+  }
+  return $rows_array;
+}
+?>
 
 
   <h1>10 Point Checklist</h1>
   <form action="ActionPlan.php" method="get">
     <ul>
-      <li>Accessibility Tab on the Homepage
-      <input type='radio' id='task-0-yes' name='task-0' value='yes'>Yes
-      <input type='radio' id='task-0-no' name='task-0' value='no'>No
+      <li><?php $first_element = reset(getQuestion("Q1")[0]); echo (implode(',', array($first_element))); ?> <a title="Accessibility tab that shows different features (e.g. ramps/lifts)"><img src="https://shots.jotform.com/kade/Screenshots/blue_question_mark.png" height="13px"/></a>
+      <input type='radio' id='Q1-yes' name='Q1' value='yes'>Yes
+      <input type='radio' id='Q1-no' name='Q1' value='no'>No
       </li>
-      <li>Videos available on website <input type='radio' id='task-1-yes' name='task-1' value='yes'>Yes<input type='radio' id='task-1-no' name='task-1' value='no'>No</li>
-      <li>Audio description of video available <input type='radio' id='task-2-yes' name='task-2' value='yes'>Yes<input type='radio' id='task-2-no' name='task-2' value='no'>No</li>
-      <li>Link to online accessibility guide <input type='radio' id='task-3-yes' name='task-3' value='yes'>Yes<input type='radio' id='task-3-no' name='task-3' value='no'>No</li>
-      <li>Audio version of accessibility guide available <input type='radio' id='task-4-yes' name='task-4' value='yes'>Yes<input type='radio' id='task-4-no' name='task-4' value='no'>No</li>
-      <li>Tab on the Homepage <input type='radio' id='task-5-yes' name='task-5' value='yes'>Yes<input type='radio' id='task-5-no' name='task-5' value='no'>No</li>
-      <li>Wi-Fi code displayed <input type='radio' id='task-6-yes' name='task-6' value='yes'>Yes<input type='radio' id='task-6-no' name='task-6' value='no'>No</li>
-      <li>Information on concession available <input type='radio' id='task-7-yes' name='task-7' value='yes'>Yes<input type='radio' id='task-7-no' name='task-7' value='no'>No</li>
-      <li>Adjustable text/contrast on the website <input type='radio' id='task-8-yes' name='task-8' value='yes'>Yes<input type='radio' id='task-8-no' name='task-8' value='no'>No</li>
-      <li>Accessible On-Site Parking <input type='radio' id='task-9-yes' name='task-9' value='yes'>Yes<input type='radio' id='task-9-no' name='task-9' value='no'>No</li>   
+      <li><?php $first_element = reset(getQuestion("Q2")[0]); echo (implode(',', array($first_element))); ?><input type='radio' id='Q2-yes' name='Q2' value='yes'>Yes<input type='radio' id='Q2-no' name='Q2' value='no'>No</li>
+      <li><?php $first_element = reset(getQuestion("Q3")[0]); echo (implode(',', array($first_element))); ?> <input type='radio' id='Q3-yes' name='Q3' value='yes'>Yes<input type='radio' id='Q3-no' name='Q3' value='no'>No</li>
+      <li><?php $first_element = reset(getQuestion("Q4")[0]); echo (implode(',', array($first_element))); ?><input type='radio' id='Q4-yes' name='Q4' value='yes'>Yes<input type='radio' id='Q4-no' name='Q4' value='no'>No</li>
+      <li><?php $first_element = reset(getQuestion("Q5")[0]); echo (implode(',', array($first_element))); ?> <input type='radio' id='Q5-yes' name='Q5' value='yes'>Yes<input type='radio' id='Q5-no' name='Q5' value='no'>No</li>
+      <li><?php $first_element = reset(getQuestion("Q6")[0]); echo (implode(',', array($first_element))); ?><input type='radio' id='Q6-yes' name='Q6' value='yes'>Yes<input type='radio' id='Q6-no' name='Q6' value='no'>No</li>
+      <li><?php $first_element = reset(getQuestion("Q7")[0]); echo (implode(',', array($first_element))); ?> <input type='radio' id='Q7-yes' name='Q7' value='yes'>Yes<input type='radio' id='Q7-no' name='Q7' value='no'>No</li>
+      <li><?php $first_element = reset(getQuestion("Q8")[0]); echo (implode(',', array($first_element))); ?> <input type='radio' id='Q8-yes' name='Q8' value='yes'>Yes<input type='radio' id='Q8-no' name='Q8' value='no'>No</li>
+      <li><?php $first_element = reset(getQuestion("Q9")[0]); echo (implode(',', array($first_element))); ?> <input type='radio' id='Q9-yes' name='Q9' value='yes'>Yes<input type='radio' id='Q9-no' name='Q9' value='no'>No</li>
+      <li><?php $first_element = reset(getQuestion("Q10")[0]); echo (implode(',', array($first_element))); ?> <input type='radio' id='Q10-yes' name='Q10' value='yes'>Yes<input type='radio' id='Q10-no' name='Q10' value='no'>No</li>   
       
       <?php $testingtesting = "Cinema"; ?>
-      <ul id="hidden_fornow" <?php if ($testingtesting == "Cinema") { echo 'style="display:block;"'; $totalQs = 12; } else { echo 'style="display:none;"'; } ?>>
-        <li>Hidden question <input type='radio' id='task-10-yes' name='task-10' value='yes'>Yes<input type='radio' id='task-10-no' name='task-10' value='no'>No</li>
-        <li>Hidden question 2<input type='radio' id='task-11-yes' name='task-11' value='yes'>Yes<input type='radio' id='task-11-no' name='task-11' value='no'>No</li>
-      </ul>
-
-      <ul id="hidden2" style="display:none;">
-      <li>Hidden question 3<input type='radio' id='task-12-yes' name='task-12' value='yes'>Yes<input type='radio' id='task-12-no' name='task-12' value='no'>No</li>
-      <li>Hidden question 4<input type='radio' id='task-13-yes' name='task-13' value='yes'>Yes<input type='radio' id='task-13-no' name='task-13' value='no'>No</li>
+      <ul id="hidden_fornow" <?php if ($testingtesting == "Cinema") { echo 'style="display:block;"'; $totalQs = 11; } else { echo 'style="display:none;"'; } ?>>
+        <li><?php $first_element = reset(getQuestion("Q11")[0]); echo (implode(',', array($first_element))); ?><input type='radio' id='Q11-yes' name='Q11' value='yes'>Yes<input type='radio' id='Q11-no' name='Q11' value='no'>No</li>
       </ul>
       
       <input type="hidden" name="totalQuestions" value="">
