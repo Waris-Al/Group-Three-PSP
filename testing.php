@@ -34,7 +34,7 @@ function getQs()
 {
     $venueType = "Cinema";
   $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
-  $stmt = $db->prepare("SELECT * FROM Checklist WHERE QuestionNo LIKE 'Q%' AND (Venue = 'General' OR Venue = '$venueType') ORDER BY CAST(SUBSTR(QuestionNo, 2) AS UNSIGNED) DESC LIMIT 1");
+  $stmt = $db->prepare("SELECT QuestionNo FROM Checklist WHERE (Venue = 'General' OR Venue = '$venueType')");
   $result = $stmt->execute();
   
   $arrayResult = [];//prepare an empty array first
@@ -43,9 +43,9 @@ function getQs()
   }
   return $arrayResult;
 }
-$lastQ = substr((getQs())[0]['QuestionNo'], 1);
-$lastQ= $lastQ+1;
-
+//$lastQ = substr((getQs())[0]['QuestionNo'], 1);
+$lastQ=count(getQs());
+$lastQ++;
 
 
 function getQuestion($questnum)
@@ -68,23 +68,28 @@ $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
 }
 ?>
 <?php
+/*
 
-    for ($i=1; $i<$lastQ; $i++):
-        $testString = "Q" . $i;
-?>
+    /*for ($i=1; $i<$lastQ; $i++):
+        $testString = $questionNumbers[$i];
+        echo $testString;
+        ?> */
+$questionNumbers = getQs();
+foreach ($questionNumbers as $row) : ?>
+
 
 <form action="ActionPlan.php" method="get">
 <li>
 <?php 
-$totalQ = $i;
-$first_element = reset(getQuestion($testString)[0]); echo (implode(',', array($first_element))); 
-$idYes = "Q" . $i . "-yes";
-$idNo = "Q" . $i . "-no";
+$totalQ = $lastQ-1;
+$first_element = reset(getQuestion($row['QuestionNo'])[0]); echo (implode(',', array($first_element))); 
+$idYes = $row['QuestionNo'] . "-yes";
+$idNo = $row['QuestionNo'] . "-no";
 ?>
-<input type='radio' id='<?php echo $idYes ?>' name='<?php echo $testString ?>' value='yes'>Yes<input type='radio' id='<?php echo $idNo ?>' name='<?php echo $testString ?>' value='no'>No
+<input type='radio' id='<?php echo $idYes ?>' name='<?php echo $row['QuestionNo'] ?>' value='yes'>Yes<input type='radio' id='<?php echo $idNo ?>' name='<?php echo $row['QuestionNo'] ?>' value='no'>No
 </li>
   
-<?php endfor;?>
+<?php endforeach;?>
 <input type="hidden" name="totalQuestions" value="">
     <input type="submit" id="submit-btn" value="Submit" name="Submit">
   </form>

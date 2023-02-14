@@ -18,7 +18,7 @@ $lastQ = $lastQ+1;
 $lastQ = "Q" . $lastQ;
 
 
-$nameErr = $pwderr = $invalidMesg = "";
+$nameErr = $pwderr = $venueErr = $invalidMesg = "";
 
 if (isset($_POST['submit'])) {
 
@@ -30,10 +30,17 @@ if (isset($_POST['submit'])) {
         $pwderr = "Enter the Action Point";
       }
 
-    if($_POST['username'] != null && $_POST['password'] !=null)
+      if ($_POST['venue']==null) {
+        $pwderr = "Enter the venue";
+      }
+
+    if($_POST['username'] != null && $_POST['password'] !=null & $_POST['venue'] != null)
     {
+        $quest = $_POST['username'];
+        $point = $_POST['password'];
+        $ven = $_POST['venue'];
         $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
-        $stmt = $db->prepare("INSERT INTO Checklist ('QuestionNo', 'Question', 'ActionPoint') VALUES ('$lastQ', 'test', 'test')");
+        $stmt = $db->prepare("INSERT INTO Checklist (QuestionNo, Question, ActionPoint, Venue) VALUES ('$lastQ', '$quest', '$point', '$ven')");
         $result = $stmt->execute();
     }
 }
@@ -51,6 +58,13 @@ if (isset($_POST['submit'])) {
                         <input class="form-control" type="text" name = "password">
                         <span style="color: red"><?php echo $pwderr; ?></span>
                    </div>
+
+                   <div class="form-group col-md-6">
+                        <label class="control-label labelFont">Venue Type (if not venue specific please enter "General")</label>
+                        <input class="form-control" type="text" name = "venue">
+                        <span style="color: red"><?php echo $venueErr; ?></span>
+                   </div>
+
                    <div class="form-group col-md-4">
                         <input class="btn btn-primary" type="submit" value="submit" name ="submit">
                    </div>

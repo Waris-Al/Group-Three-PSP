@@ -1,14 +1,30 @@
 <?php
 require('fpdf/multicellmax.php');
+
+function getQs()
+{
+  $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
+  $stmt = $db->prepare("SELECT * FROM Checklist WHERE QuestionNo LIKE 'Q%' ORDER BY CAST(SUBSTR(QuestionNo, 2) AS UNSIGNED) DESC LIMIT 1");
+  $result = $stmt->execute();
+  
+  $arrayResult = [];//prepare an empty array first
+  while ($row = $result->fetchArray()){ // use fetchArray(SQLITE3_NUM) - another approach
+      $arrayResult [] = $row; //adding a record until end of records
+  }
+  return $arrayResult;
+}
+$dw = substr((getQs())[0]['QuestionNo'], 1);
+
+
 $endText = "";
 $totalNos = 0;
 $totalQuestions = $_GET['totalQuestions'];
 $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
-for ($i=1; $i <= $totalQuestions; $i++)
+for ($i=1; $i <= $dw; $i++)
 {
 $task = "Q";
 $testString = $task . strval($i);
-if ($_GET["$testString"]=="no")
+if (isset($_GET["$testString"]) && $_GET["$testString"]=="no")
 {
 $totalNos++;
   $stmt = $db->prepare("SELECT ActionPoint FROM Checklist WHERE QuestionNo = '$testString'");
