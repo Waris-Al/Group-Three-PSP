@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Everyone Everywhere</title>
+    
     
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,7 +16,7 @@
 	<header>
 			<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
 				<div class="container">
-					<a class="navbar-brand" href="/Group-Three-PSP/Homepage.php">Everyone Everywhere</a>
+					<a class="navbar-brand" href="/Group-Three-PSP/Homepage.php"><img src="logo.jpg" alt="Company Logo " width="100" height="50"></a>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
 							aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>

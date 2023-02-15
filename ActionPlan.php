@@ -1,33 +1,34 @@
 <?php
+include 'phpqrcode/qrlib.php';
 require('fpdf/multicellmax.php');
 
-function getQs()
+function getQNos()
 {
   $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
   $stmt = $db->prepare("SELECT * FROM Checklist WHERE QuestionNo LIKE 'Q%' ORDER BY CAST(SUBSTR(QuestionNo, 2) AS UNSIGNED) DESC LIMIT 1");
   $result = $stmt->execute();
   
-  $arrayResult = [];//prepare an empty array first
-  while ($row = $result->fetchArray()){ // use fetchArray(SQLITE3_NUM) - another approach
-      $arrayResult [] = $row; //adding a record until end of records
+  $arrayResult = [];
+  while ($row = $result->fetchArray())
+  {
+      $arrayResult [] = $row;
   }
   return $arrayResult;
 }
-$dw = substr((getQs())[0]['QuestionNo'], 1);
+$NumberOfQs = substr((getQNos())[0]['QuestionNo'], 1);
 
 
-$endText = "";
-$totalNos = 0;
+$pointsToImprove = "";
+$NumberOfImprovemenets = 0;
 $totalQuestions = $_GET['totalQuestions'];
 $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
-for ($i=1; $i <= $dw; $i++)
+for ($i=1; $i <= $NumberOfQs; $i++)
 {
-$task = "Q";
-$testString = $task . strval($i);
-if (isset($_GET["$testString"]) && $_GET["$testString"]=="no")
+$QuestionInDB = "Q" . strval($i);
+if (isset($_GET["$QuestionInDB"]) && $_GET["$QuestionInDB"]=="no")
 {
-$totalNos++;
-  $stmt = $db->prepare("SELECT ActionPoint FROM Checklist WHERE QuestionNo = '$testString'");
+$NumberOfImprovemenets++;
+  $stmt = $db->prepare("SELECT ActionPoint FROM Checklist WHERE QuestionNo = '$QuestionInDB'");
   $result = $stmt->execute();
 
 
@@ -39,26 +40,32 @@ $totalNos++;
 
   foreach ($rows_array as $value)
 {
-    $endText.= "-" . $value['ActionPoint'] . "\n";
+    $pointsToImprove.= "-" . $value['ActionPoint'] . "\n";
 }
   
 }
 }
 
 
-$totalPercent = (100-($totalNos/$totalQuestions)*100);
+$totalPercent = (100-($NumberOfImprovemenets/$totalQuestions)*100);
 $totalPercent = round($totalPercent, 1);
 
-$endText.="\nYour overall Accessibility Score is $totalPercent %";
+$pointsToImprove.="\nYour overall Accessibility Score is $totalPercent %";
 
 $pdf=new PDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial','',10);
-$txt=$pdf->MultiCell(100,5,$endText,0,'J',0,$totalQuestions);
+$txt=$pdf->MultiCell(100,5,$pointsToImprove,0,'J',0,$totalQuestions);
 
-$fileName = $totalPercent . ".pdf";
+$report = $totalPercent . ".pdf";
+
+$qr_text = 'https://docs.google.com/document/d/1YOHMRAphILRjlTk7r0Getu9h2yKg3Rwp-D9OjCmFpRI/edit'; // change this to the text you want to encode in the QR code
+$qr_file = 'qr.png'; // specify the filename for the QR code image
+$pdf->Image($qr_file);
+
+
 $pdf->Output();
-$pdf->Output('F', $fileName);
+$pdf->Output('F', $report);
 
 
 echo "\nYour overall Accessibility Score is $totalPercent %";

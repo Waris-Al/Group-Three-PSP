@@ -1,5 +1,5 @@
 <?php include("NavigationBar.php");
-$lastQ=10;
+$amountOfQuestions=10;
 ?>
 
 <!DOCTYPE html>
@@ -11,8 +11,6 @@ $lastQ=10;
   }
 </style>
 
-<head>
-  <title>10 Point Checklist</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <style>
     .progress {
@@ -25,27 +23,25 @@ $lastQ=10;
       height: 100%;
     }
   </style>
-</head>
-<body>
 
 
 <?php 
-function getQs()
+function getQuestionsNos()
 {
-    $venueType = "Cinema";
+  $venueType = "Cinema";
   $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
   $stmt = $db->prepare("SELECT QuestionNo FROM Checklist WHERE (Venue = 'General' OR Venue = '$venueType')");
   $result = $stmt->execute();
   
-  $arrayResult = [];//prepare an empty array first
-  while ($row = $result->fetchArray()){ // use fetchArray(SQLITE3_NUM) - another approach
-      $arrayResult [] = $row; //adding a record until end of records
+  $arrayResult = [];
+  while ($row = $result->fetchArray())
+  { 
+      $arrayResult [] = $row; 
   }
   return $arrayResult;
 }
-//$lastQ = substr((getQs())[0]['QuestionNo'], 1);
-$lastQ=count(getQs());
-$lastQ++;
+$amountOfQuestions=count(getQuestionsNos());
+$amountOfQuestions++;
 
 
 function getQuestion($questnum)
@@ -68,20 +64,14 @@ $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
 }
 ?>
 <?php
-/*
-
-    /*for ($i=1; $i<$lastQ; $i++):
-        $testString = $questionNumbers[$i];
-        echo $testString;
-        ?> */
-$questionNumbers = getQs();
+$questionNumbers = getQuestionsNos();
 foreach ($questionNumbers as $row) : ?>
 
 
 <form action="ActionPlan.php" method="get">
 <li>
 <?php 
-$totalQ = $lastQ-1;
+$totalQ = $amountOfQuestions-1;
 $first_element = reset(getQuestion($row['QuestionNo'])[0]); echo (implode(',', array($first_element))); 
 $idYes = $row['QuestionNo'] . "-yes";
 $idNo = $row['QuestionNo'] . "-no";
