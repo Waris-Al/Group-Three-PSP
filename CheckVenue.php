@@ -1,60 +1,50 @@
 <?php
 //include 'connect_test_db.php';
+try {
+  $db = new PDO('sqlite:ActionPoints.db');
+} catch (PDOException $e) {
+  die("Failed to connect: " . $e->getMessage());
+}
 session_start();
 include("NavigationBar.php");
 
 $searchErr = '';
-$building='';
-if(isset($_POST['save']))
-{
-    if(!empty($_POST['search']))
-    {
+$building = '';
+if(isset($_POST['save'])) {
+    if(!empty($_POST['search'])) {
         $search = $_POST['search'];
-        $stmt = $con->prepare("select * from company where city like '%$search%' or btype like '%$search%'");
-        $stmt->execute();
+        $stmt = $db->prepare("SELECT * FROM company WHERE city LIKE :search OR btype LIKE :search");
+        $stmt->execute(array(':search' => '%'.$search.'%'));
         $building = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        //print_r($building);
-         
-    }else if(!empty($_POST['search1'])){
-
+    } else if(!empty($_POST['search1'])) {
         $search = $_POST['search1'];
-        $stmt = $con->prepare("select * from company where city like '%$search%' or btype like '%$search%'");
-        $stmt->execute();
+        $stmt = $db->prepare("SELECT * FROM company WHERE city LIKE :search OR btype LIKE :search");
+        $stmt->execute(array(':search' => '%'.$search.'%'));
         $building = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }else if(!empty($_POST['search2'])){
-
-      $search = $_POST['search2'];
-
-    $wchair = "wchair";
-    $hearing = "hearing";
-    $parking = "parking";
-    $check = "yes";
-
-      if(strcmp($search,$wchair) == 0){
-        $stmt = $con->prepare("select * from company where id IN(select cid from questions where wchair like '%$check%')");
-        $stmt->execute();
-        $building = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-      }else if (strcmp($search,$hearing) == 0){
-
-        $stmt = $con->prepare("select * from company where id IN(select cid from questions where hearing like '%$check%')");
-        $stmt->execute();
-        $building = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      }else if(strcmp($search,$parking) == 0){
-        $stmt = $con->prepare("select * from company where id IN(select cid from questions where parking like '%$check%')");
-        $stmt->execute();
-        $building = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      }
-
-      
-  }
-    else
-    {
+    } else if(!empty($_POST['search2'])) {
+        $search = $_POST['search2'];
+        $wchair = "wchair";
+        $hearing = "hearing";
+        $parking = "parking";
+        $check = "yes";
+        if(strcmp($search, $wchair) == 0) {
+            $stmt = $db->prepare("SELECT * FROM company WHERE id IN (SELECT cid FROM questions WHERE wchair LIKE :check)");
+            $stmt->execute(array(':check' => '%'.$check.'%'));
+            $building = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else if (strcmp($search, $hearing) == 0) {
+            $stmt = $db->prepare("SELECT * FROM company WHERE id IN (SELECT cid FROM questions WHERE hearing LIKE :check)");
+            $stmt->execute(array(':check' => '%'.$check.'%'));
+            $building = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } else if(strcmp($search, $parking) == 0) {
+            $stmt = $db->prepare("SELECT * FROM company WHERE id IN (SELECT cid FROM questions WHERE parking LIKE :check)");
+            $stmt->execute(array(':check' => '%'.$check.'%'));
+            $building = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+    } else {
         $searchErr = "Please enter the information";
     }
-    
 }
- 
+
 ?>
 <html>
 <head>
