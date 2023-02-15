@@ -33,20 +33,12 @@ include("NavigationBar.php");
   </style>
 </head>
 <body>
-  <h1>A HUGE Welcome From Access For All</h1>
-  <p>We are committed to creating a welcoming environment for everyone, including those with accessibility needs. </p>
-  <!-- <a href="details.php" class="btn">Proceed to the Audit</a> -->
-
-  <a href="Login.php" class="btn">Sign In</a>
-  <a href="details.php" class="btn">Register</a>
-  <br>
-  <br>
-  <a href="CheckVenue.php" class="btn">Check a Location</a>
-  <br>
-  <br>
-  <br>
-</body>
-</html>
+  <h1>Your Registration submitted successs</h1>
+  <?php 
+  $type = $_GET['company'];
+  echo $type ?>
+  
+  <a href="testing.php?company=<?php echo $type?>" class="btn">Proceed to the Audit</a>
 
 
 

@@ -28,7 +28,7 @@ $amountOfQuestions=10;
 <?php 
 function getQuestionsNos()
 {
-  $venueType = "Cinema";
+  $venueType = $_GET['company'];
   $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
   $stmt = $db->prepare("SELECT QuestionNo FROM Checklist WHERE (Venue = 'General' OR Venue = '$venueType')");
   $result = $stmt->execute();
@@ -47,7 +47,7 @@ $amountOfQuestions++;
 function getQuestion($questnum)
 {
     
-$venueType = "Cinema";
+$venueType = $_GET['company'];
 $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
 
   $stmt = $db->prepare("SELECT Question FROM Checklist WHERE QuestionNo = '$questnum' AND (Venue = 'General' OR Venue = '$venueType')");
