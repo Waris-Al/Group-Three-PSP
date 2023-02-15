@@ -109,7 +109,7 @@ $idNo = $row['QuestionNo'] . "-no";
         var totalChecked = $(':radio:checked').length;
         var percentage = (totalChecked / <?php echo $totalQ; ?>) * 100;
         $('.progress-bar').css('width', percentage + '%');
-        $('.progress-bar').text(percentage + '%');
+        $('.progress-bar').text(Math.round(percentage) + '%');
         $('.progress-bar').attr('aria-valuenow', percentage);
       });
     });
