@@ -1,10 +1,11 @@
 
-    <footer  class="border-top footer text-muted">
-            <div class="container">
-                &copy; February 2023 - Edited by Team Three
-            </div>
+<footer  class="border-top footer text-muted">
+    <h6>Contact Us</h6>
+<p> Email: Access4All@example.com </p>
+            <div>
+                &copy; February 2023 
     </footer>
-
+</div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
