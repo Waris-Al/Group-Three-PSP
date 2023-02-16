@@ -42,7 +42,7 @@ include("NavigationBar.php");
 {
   $email = $_GET['company'];
   $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
-  $stmt = $db->prepare("SELECT btype FROM company WHERE email = '$email'");
+  $stmt = $db->prepare("SELECT cname, btype FROM company WHERE email = '$email'");
   $result = $stmt->execute();
   
   $arrayResult = [];
@@ -57,7 +57,7 @@ $test =  (implode(',', array($first_element)));
   
   ?>
 
-  <a href="testing.php?company=<?php echo $test?>&comname=<?php echo $_GET['company'] ?>" class="btn">Proceed to Audit</a> 
+  <a href="testing.php?company=<?php echo $test?>" class="btn">Proceed to Audit</a> 
 
 
 

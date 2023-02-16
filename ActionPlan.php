@@ -76,7 +76,7 @@ $pdf->AddPage();
 $pdf->SetFont('Arial','',10);
 $txt=$pdf->MultiCell(100,5,$pointsToImprove,0,'J',0,$totalQuestions);
 
-$report = $_GET['comname'] . ".pdf";
+$report = $_GET['company'] . ".pdf";
 
 $qr_text = 'https://docs.google.com/document/d/1YOHMRAphILRjlTk7r0Getu9h2yKg3Rwp-D9OjCmFpRI/edit'; // change this to the text you want to encode in the QR code
 $qr_file = 'qr.png'; // specify the filename for the QR code image

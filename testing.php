@@ -30,6 +30,7 @@ function getQuestions()
 {
   $venueType = $_GET['company'];
   $db = new SQLite3('ActionPoints.db');
+  $venueType = $db->escapeString($venueType);
   $stmt = $db->prepare("SELECT QuestionNo, Question FROM Checklist WHERE (Venue = 'General' OR Venue = '$venueType')");
   $result = $stmt->execute();
 
@@ -65,7 +66,6 @@ $idNo = $questionNo . "-no";
 <?php endforeach;?>
 <input type="hidden" name="totalQuestions" value="<?php echo $totalQ ?>">
     <input type="hidden" name="company" value="<?php echo $_GET['company'] ?>">
-    <input type="hidden" name="comname" value="<?php echo $_GET['comname'] ?>">
     <input type="submit" id="submit-btn" value="Submit" name="Submit">
   </form>
 
