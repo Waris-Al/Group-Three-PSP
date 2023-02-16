@@ -1,5 +1,4 @@
 <?php
-//include 'connect_test_db.php';
 try {
   $db = new PDO('sqlite:ActionPoints.db');
 } catch (PDOException $e) {
@@ -134,14 +133,16 @@ if(isset($_POST['save'])) {
                         ?>
                     <tr>
                         <td><?php echo $key+1;?></td>
-                        <td><?php echo $value['cname'];?></td>
+                        <td><a href="<?php echo $value['cname'] . '.pdf'; ?>" target="_blank" onclick="window.open('<?php echo $value['cname'] . '.pdf'; ?>','newwindow','width=800,height=600'); return false;"><?php echo $value['cname'];?></td>
                         <td><?php echo $value['city'];?></td>
                         <td><?php echo $value['postal'];?></td>
                         <td><?php echo $value['btype'];?></td>
+                        
                     </tr>
-                         
+                         //
                         <?php
-                    }
+                    } // INSERT INTO company (id, email, pass, cname, city, postal, btype) VALUES (123, "test@test.com", "pass", "shouldhopefullywork", "sheff", "S4", "General")
+                    //INSERT INTO questions (id, cid, wchair, video, audio, hearing, parking)
                      
                  }
                 ?>
@@ -154,3 +155,6 @@ if(isset($_POST['save'])) {
 <script src="bootstrap.min.js"></script>
 </body>
 </html>
+
+
+

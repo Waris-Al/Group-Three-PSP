@@ -64,8 +64,9 @@ $idNo = $questionNo . "-no";
   
 <?php endforeach;?>
 <input type="hidden" name="totalQuestions" value="<?php echo $totalQ ?>">
-    <input type="submit" id="submit-btn" value="Submit" name="Submit">
     <input type="hidden" name="company" value="<?php echo $_GET['company'] ?>">
+    <input type="hidden" name="comname" value="<?php echo $_GET['comname'] ?>">
+    <input type="submit" id="submit-btn" value="Submit" name="Submit">
   </form>
 
 

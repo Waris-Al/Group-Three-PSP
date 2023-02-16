@@ -57,7 +57,7 @@ $test =  (implode(',', array($first_element)));
   
   ?>
 
-  <a href="testing.php?company=<?php echo $test?>" class="btn">Proceed to Audit</a> 
+  <a href="testing.php?company=<?php echo $test?>&comname=<?php echo $_GET['company'] ?>" class="btn">Proceed to Audit</a> 
 
 
 
