@@ -139,7 +139,6 @@ if(isset($_POST['save'])) {
                         <td><?php echo $value['btype'];?></td>
                         
                     </tr>
-                         //
                         <?php
                     } // INSERT INTO company (id, email, pass, cname, city, postal, btype) VALUES (123, "test@test.com", "pass", "shouldhopefullywork", "sheff", "S4", "General")
                     //INSERT INTO questions (id, cid, wchair, video, audio, hearing, parking)
