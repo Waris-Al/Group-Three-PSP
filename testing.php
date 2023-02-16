@@ -26,12 +26,13 @@ $amountOfQuestions=10;
 
 
 <?php 
-function getQuestionsNos()
+function getQuestions()
 {
   $venueType = $_GET['company'];
   $db = new SQLite3('ActionPoints.db');
-  $stmt = $db->prepare("SELECT QuestionNo FROM Checklist WHERE (Venue = 'General' OR Venue = '$venueType')");
+  $stmt = $db->prepare("SELECT QuestionNo, Question FROM Checklist WHERE (Venue = 'General' OR Venue = '$venueType')");
   $result = $stmt->execute();
+
   
   $arrayResult = [];
   while ($row = $result->fetchArray())
@@ -40,49 +41,33 @@ function getQuestionsNos()
   }
   return $arrayResult;
 }
-$amountOfQuestions=count(getQuestionsNos());
-$amountOfQuestions++;
+$questions = getQuestions();
+$amountOfQuestions = count($questions);
 
 
-function getQuestion($questnum)
-{
-    
-$venueType = $_GET['company'];
-$db = new SQLite3('ActionPoints.db');
-
-  $stmt = $db->prepare("SELECT Question FROM Checklist WHERE QuestionNo = '$questnum' AND (Venue = 'General' OR Venue = '$venueType')");
-  $result = $stmt->execute();
-  
-
-
-  $rows_array = [];
-  while ($row=$result->fetchArray())
-  {
-      $rows_array[]=$row;
-  }
-  return $rows_array;
-}
 ?>
-<?php
-$questionNumbers = getQuestionsNos();
-foreach ($questionNumbers as $row) : ?>
+<?php foreach ($questions as $row) : ?>
 
 
 <form action="ActionPlan.php" method="get">
 <li>
 <?php 
-$totalQ = $amountOfQuestions-1;
-$first_element = reset(getQuestion($row['QuestionNo'])[0]); echo (implode(',', array($first_element))); 
-$idYes = $row['QuestionNo'] . "-yes";
-$idNo = $row['QuestionNo'] . "-no";
+$totalQ = $amountOfQuestions;
+$questionNo = $row['QuestionNo'];
+$question = $row['Question'];
+$idYes = $questionNo . "-yes";
+$idNo = $questionNo . "-no";
 ?>
-<input type='radio' id='<?php echo $idYes ?>' name='<?php echo $row['QuestionNo'] ?>' value='yes'>Yes<input type='radio' id='<?php echo $idNo ?>' name='<?php echo $row['QuestionNo'] ?>' value='no'>No
+<label for="<?php echo $idYes ?>"><?php echo $question ?></label>
+<input type='radio' id='<?php echo $idYes ?>' name='<?php echo $questionNo ?>' value='yes'>Yes<input type='radio' id='<?php echo $idNo ?>' name='<?php echo $questionNo ?>' value='no'>No
 </li>
   
 <?php endforeach;?>
-<input type="hidden" name="totalQuestions" value="">
+<input type="hidden" name="totalQuestions" value="<?php echo $totalQ ?>">
     <input type="submit" id="submit-btn" value="Submit" name="Submit">
+    <input type="hidden" name="company" value="<?php echo $_GET['company'] ?>">
   </form>
+
 
  
 

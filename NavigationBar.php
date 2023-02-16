@@ -23,21 +23,24 @@
       <div class="collapse navbar-collapse" id="navbarsExample02">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/Group-Three-PSP/Homepage.php"><img src="logo2.jpg" width = 70 height = 35></a>
+            <a class="nav-link" href="Homepage.php"><img src="logo2.jpg" width = 70 height = 35></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/Group-Three-PSP/Details.php">Register</a>
+            <a class="nav-link" href="Details.php">Register</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/Group-Three-PSP/Login.php">Login</a>
+            <a class="nav-link" href="Login.php">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/Group-Three-PSP/CheckVenue.php">Check a Location</a>
+            <a class="nav-link" href="CheckVenue.php">Check a Location</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="AdminLogin.php">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="AboutUs.php">About Us</a>
           </li>
         </ul>
-        <form class="form-inline my-2 my-md-0">
-          <input class="form-control" type="text" placeholder="Search">
-        </form>
       </div>
     </nav>
     </header>

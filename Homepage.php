@@ -35,6 +35,8 @@ include("NavigationBar.php");
 <body>
   <h1>A HUGE Welcome From Access For All</h1>
   <p>We are committed to creating a welcoming environment for everyone, including those with accessibility needs. </p>
+
+  
   <!-- <a href="details.php" class="btn">Proceed to the Audit</a> -->
 
   <a href="Login.php" class="btn">Sign In</a>

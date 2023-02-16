@@ -60,10 +60,14 @@ if (isset($_POST['submit'])) {
                    </div>
 
                    <div class="form-group col-md-6">
-                        <label class="control-label labelFont">Venue Type (if not venue specific please enter "General")</label>
-                        <input class="form-control" type="text" name = "venue">
-                        <span style="color: red"><?php echo $venueErr; ?></span>
-                   </div>
+                   <label class="control-label labelFont">Venue Type</label><br>
+                    <select name="venue" required="true">
+                    <option value="General">General</option>
+                    <option value="restaurant">Restaurant</option>
+                    <option value="cinema">Cinema</option>
+                    <option value="gym">Gym</option>
+                  </select>
+                  </div>
 
                    <div class="form-group col-md-4">
                         <input class="btn btn-primary" type="submit" value="submit" name ="submit">
