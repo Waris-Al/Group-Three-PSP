@@ -38,26 +38,27 @@ include("NavigationBar.php");
   
   <?php 
   
-  function getQNos()
-{
-  $email = $_GET['company'];
-  $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
-  $stmt = $db->prepare("SELECT cname, btype FROM company WHERE email = '$email'");
-  $result = $stmt->execute();
-  
-  $arrayResult = [];
-  while ($row = $result->fetchArray())
-  {
-      $arrayResult [] = $row;
-  }
-  return $arrayResult;
+  function getQNos() {
+    $email = $_GET['company'];
+    $db = new SQLite3('ActionPoints.db');
+    $stmt = $db->prepare("SELECT cname, btype FROM company WHERE email = '$email'");
+    $result = $stmt->execute();
+
+    $arrayResult = [];
+    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+        $arrayResult = $row;
+    }
+    return $arrayResult;
 }
-$first_element = reset(getQNos(['btype'])[0]); 
-$test =  (implode(',', array($first_element))); 
+
+$result = getQNos();
+$test = $result['cname'];
+$test2 = $result['btype'];
+
   
   ?>
 
-  <a href="testing.php?company=<?php echo $test?>" class="btn">Proceed to Audit</a> 
+  <a href="testing.php?company=<?php echo $test?>&type=<?php echo $test2 ?>" class="btn">Proceed to Audit</a> 
 
 
 

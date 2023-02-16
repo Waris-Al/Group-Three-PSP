@@ -28,7 +28,7 @@ $amountOfQuestions=10;
 <?php 
 function getQuestions()
 {
-  $venueType = $_GET['company'];
+  $venueType = $_GET['type'];
   $db = new SQLite3('ActionPoints.db');
   $venueType = $db->escapeString($venueType);
   $stmt = $db->prepare("SELECT QuestionNo, Question FROM Checklist WHERE (Venue = 'General' OR Venue = '$venueType')");
