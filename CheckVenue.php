@@ -79,7 +79,7 @@ if(isset($_POST['save'])) {
               <select class="form-select" name="search1">
                 <option value="">All</option>
                 <option value="restaurant">Restaurant</option>
-                <option value="venue">Venue</option>
+                <option value="General">General</option>
                 <option value="cinema">Cinema</option>
                 <option value="gym">Gym</option>
               </select>

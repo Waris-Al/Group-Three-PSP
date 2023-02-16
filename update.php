@@ -4,7 +4,7 @@ function getInfo()
 {
 $questionNo = $_GET['questionNo'];
 
-    $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
+    $db = new SQLite3('ActionPoints.db');
     $stmt = $db->prepare("SELECT * FROM Checklist WHERE QuestionNo = '$questionNo'");
     $result = $stmt->execute();
     
@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
         $questionNo = $_GET['questionNo'];
         $updater = $_POST['username'];
         $col = $_POST['updating'];
-        $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
+        $db = new SQLite3('ActionPoints.db');
         $stmt = $db->prepare("UPDATE Checklist SET $col = '$updater' WHERE QuestionNo = '$questionNo'");
         $result = $stmt->execute();
     }
@@ -37,7 +37,7 @@ if (isset($_POST['submit'])) {
     if($_POST['updating'] == "Delete")
     {
         $questionNo = $_GET['questionNo'];
-        $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
+        $db = new SQLite3('ActionPoints.db');
         $stmt = $db->prepare("DELETE FROM Checklist WHERE QuestionNo = '$questionNo'");
         $result = $stmt->execute();
     }

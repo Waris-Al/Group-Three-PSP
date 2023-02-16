@@ -16,7 +16,6 @@
 <body class="bgColor">
     <header>
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a class="navbar-brand"style="color:white ">Access for all</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -24,7 +23,7 @@
       <div class="collapse navbar-collapse" id="navbarsExample02">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="/Group-Three-PSP/Homepage.php">Home</a>
+            <a class="nav-link" href="/Group-Three-PSP/Homepage.php"><img src="logo2.jpg" width = 70 height = 35></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/Group-Three-PSP/Details.php">Register</a>

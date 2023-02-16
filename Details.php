@@ -92,11 +92,11 @@ include("NavigationBar.php")
       <select name="company" required="true">
         <option value="">--- Select an Option ---</option>
         <option value="restaurant">Restaurant</option>
-        <option value="venue">Venue</option>
+        <option value="General">General</option>
         <option value="cinema">Cinema</option>
         <option value="gym">Gym</option>
       </select>
-      <!-- <p>If you have a venue not listed please enter it here:</p>
+      <!-- <p>If you have a General not listed please enter it here:</p>
       <input type="text" placeholder="Company type" class="form-control" name="company"> -->
       <br>
       <br>

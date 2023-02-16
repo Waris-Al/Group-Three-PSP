@@ -3,7 +3,7 @@
 <?php 
 function getQs()
 {
-  $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
+  $db = new SQLite3('ActionPoints.db');
   $stmt = $db->prepare("SELECT * FROM Checklist WHERE QuestionNo LIKE 'Q%' ORDER BY CAST(SUBSTR(QuestionNo, 2) AS UNSIGNED) DESC LIMIT 1");
   $result = $stmt->execute();
   
@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
         $quest = $_POST['username'];
         $point = $_POST['password'];
         $ven = $_POST['venue'];
-        $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
+        $db = new SQLite3('ActionPoints.db');
         $stmt = $db->prepare("INSERT INTO Checklist (QuestionNo, Question, ActionPoint, Venue) VALUES ('$lastQ', '$quest', '$point', '$ven')");
         $result = $stmt->execute();
     }

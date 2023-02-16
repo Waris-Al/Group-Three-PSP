@@ -32,7 +32,7 @@ $totalQs=10;
 <?php 
 function getQuestion($questnum)
 {
-$db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
+$db = new SQLite3('ActionPoints.db');
 
   $stmt = $db->prepare("SELECT Question FROM Checklist WHERE QuestionNo = '$questnum'");
   $result = $stmt->execute();

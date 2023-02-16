@@ -38,7 +38,6 @@ include("NavigationBar.php");
   <a href="logout.php" class="btn">Log out</a> 
 
 
-
 <?php require("Footer.php");?>
 
 

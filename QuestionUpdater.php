@@ -1,7 +1,7 @@
 <?php include("NavigationBar.php"); 
 function getQs()
 {
-  $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
+  $db = new SQLite3('ActionPoints.db');
   $stmt = $db->prepare('SELECT * FROM Checklist');
   $result = $stmt->execute();
   

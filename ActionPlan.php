@@ -4,7 +4,7 @@ require('fpdf/multicellmax.php');
 
 function getQNos()
 {
-  $db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
+  $db = new SQLite3('ActionPoints.db');
   $stmt = $db->prepare("SELECT * FROM Checklist WHERE QuestionNo LIKE 'Q%' ORDER BY CAST(SUBSTR(QuestionNo, 2) AS UNSIGNED) DESC LIMIT 1");
   $result = $stmt->execute();
   
@@ -21,7 +21,7 @@ $NumberOfQs = substr((getQNos())[0]['QuestionNo'], 1);
 $pointsToImprove = "";
 $NumberOfImprovemenets = 0;
 $totalQuestions = $_GET['totalQuestions'];
-$db = new SQLite3('C:\xampp\htdocs\Group-Three-PSP\ActionPoints.db');
+$db = new SQLite3('ActionPoints.db');
 for ($i=1; $i <= $NumberOfQs; $i++)
 {
 $QuestionInDB = "Q" . strval($i);
@@ -42,8 +42,27 @@ $NumberOfImprovemenets++;
 {
     $pointsToImprove.= "-" . $value['ActionPoint'] . "\n";
 }
-  
 }
+/*
+else 
+{
+  $stmt = $db->prepare("SELECT GoodPoint FROM Checklist WHERE QuestionNo = '$QuestionInDB'");
+  $result = $stmt->execute();
+
+    $rows_array = [];
+  while ($row=$result->fetchArray())
+  {
+      $rows_array[]=$row;
+  }
+
+  foreach ($rows_array as $value)
+{
+    $pointsToImprove.= "-" . $value['ActionPoint'] . "\n";
+}
+//make this its own function that gets called in the else statement
+//then when you go through the results adding all the info to its own table
+}
+*/
 }
 
 

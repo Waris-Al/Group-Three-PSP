@@ -35,8 +35,7 @@ include("NavigationBar.php");
 <body>
   <h1>Your Registration submitted successs</h1>
   <?php 
-  $type = $_GET['company'];
-  echo $type ?>
+  $type = $_GET['company']; ?>
   
   <a href="testing.php?company=<?php echo $type?>" class="btn">Proceed to the Audit</a>
 
