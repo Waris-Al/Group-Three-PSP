@@ -7,7 +7,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 } else {
   // display the default navbar
   include 'NavigationBar.php';
-  $welcomemessage = "Welcome to Everybody Welcome";
+  $welcomemessage = "A BIG Hello From Everybody Welcome!";
 }
 ?>
 <!DOCTYPE html>
@@ -86,7 +86,7 @@ p {
   </style>
 </head>
 <body>
-  <h1>A BIG Hello From Everybody Welcome!</h1>
+  <h1><?php echo $welcomemessage ?></h1>
   <p>We are committed to creating a welcoming environment for everyone, including those with accessibility needs. Join our community today and start exploring!</p>
 
   <!-- Add more content here -->

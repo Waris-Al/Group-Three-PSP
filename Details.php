@@ -9,104 +9,130 @@ session_start();
 include("NavigationBar.php") 
 
 ?>
-
 <!DOCTYPE html>
 <html>
   <head>
     <style>
       /* Add some styles for a visually appealing layout */
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        background-color: #f2f2f2;
-      }
+    /* Overall page styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
 
-      h1 {
-        font-size: 36px;
-        margin-top: 50px;
-      }
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+}
 
-      h3 {
-        font-size: 24px;
-        margin-top: 30px;
-      }
+h1, h3, h4 {
+  text-align: center;
+}
 
-      h4 {
-        font-size: 18px;
-        margin-top: 30px;
-      }
+/* Form styling */
+form {
+  margin-top: 20px;
+}
 
-      input[type="text"],
-      select {
-        padding: 10px;
-        font-size: 16px;
-        width: 200px;
-        margin-top: 20px;
-      }
+.form-group {
+  margin-bottom: 20px;
+}
 
-      label {
-        font-size: 18px;
-        margin-right: 10px;
-      }
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
 
-      button {
-        background-color: blue;
-        color: white;
-        padding: 12px 20px;
-        border-radius: 5px;
-        text-decoration: none;
-        margin-top: 20px;
-      }
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+}
 
-      .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
+input[type="submit"] {
+  width: auto;
+  margin-top: 20px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+input[type="submit"]:hover {
+  background-color: #0062cc;
+}
+
+/* Responsive design */
+@media screen and (max-width: 600px) {
+  .container {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1>Welcome</h1>
-      <h3>We're glad you have shown interest</h3>
-      <h4>Please Register your company below:</h4>
+  <div class="container">
+    <h1>Welcome to our platform</h1>
+    <h3>We're glad you're here!</h3>
+    <h4>Please register your company below:</h4>
 
-      <form method="post" action="user_registration_script.php">
-
-      <input type="text" class="form-control" name="email" placeholder="Email" required="true">
-      <br>
-      <br>
-      <input type="text" class="form-control" name="password" placeholder="Password" required="true">
-      <br>
-      <br>
-      <input type="text" placeholder="Company Name" class="form-control" name="cname" required="true">
-      <br>
-      <br>
-      <input type="text" placeholder="City" class="form-control" name="city" required="true">
-      <br>
-      <br>
-      <input type="text" placeholder="Post Code" class="form-control" name="pcode" required="true">
-      <br>
-      <br>
-      <label for="company">Business type:</label>
-      <select name="company" required="true">
-        <option value="">--- Select an Option ---</option>
-        <option value="restaurant">Restaurant</option>
-        <option value="General">Other</option>
-        <option value="cinema">Cinema</option>
-        <option value="gym">Gym</option>
-      </select>
-      <!-- <p>If you have a venue not listed please enter it here:</p>
-      <input type="text" placeholder="Company type" class="form-control" name="company"> -->
-      <br>
-      <br>
-      <input type="submit" class="btn btn-primary" value="Register Now">
+    <form method="post" action="user_registration_script.php">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your password" required>
+      </div>
+      <div class="form-group">
+        <label for="companyName">Company Name:</label>
+        <input type="text" class="form-control" id="companyName" name="cname" placeholder="Enter your company name" required>
+      </div>
+      <div class="form-group">
+        <label for="city">City:</label>
+        <input type="text" class="form-control" id="city" name="city" placeholder="Enter your city" required>
+      </div>
+      <div class="form-group">
+        <label for="postCode">Post Code:</label>
+        <input type="text" class="form-control" id="postCode" name="pcode" placeholder="Enter your post code" required>
+      </div>
+      <div class="form-group">
+        <label for="companyType">Company Type:</label>
+        <select class="form-control" id="companyType" name="company" required>
+          <option value="">--- Select an Option ---</option>
+          <option value="General">Other</option>
+          <option value="restaurant">Restaurant</option>
+          <option value="cinema">Cinema</option>
+          <option value="gym">Gym</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Register Now</button>
     </form>
 
-      <!-- <a href="SelfAudit.php" class="btn">Proceed to the Audit</a> -->
-    </div>
-  </body>
+    <!-- Add any other content or features here -->
+    
+  </div>
+</body>
 </html>
+
 
 
 
