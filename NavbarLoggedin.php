@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
  
-    <title>Access For All</title>
+    <title>Everybody Welcome</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,7 +16,7 @@
 <body class="bgColor">
     <header>
     <nav class="navbar navbar-expand navbar-dark bg-dark">
-      <a class="navbar-brand"style="color:white ">Access for all</a>
+      <a class="navbar-brand"style="color:white ">Everybody Welcome</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -27,16 +27,19 @@
             <a class="nav-link" href="Homepage.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Details.php">Register</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="logout.php">log out</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="CheckVenue.php">Check a Location</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="testing.php">Audit</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="AdminLogin.php">Admin</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="AboutUs.php">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="logout.php">Logout</a>
           </li>
         </ul>
         

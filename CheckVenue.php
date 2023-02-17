@@ -5,7 +5,15 @@ try {
   die("Failed to connect: " . $e->getMessage());
 }
 session_start();
-include("NavigationBar.php");
+
+
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+  // display the navbar with the logout link
+  include 'NavbarLoggedin.php';
+} else {
+  // display the default navbar
+  include 'NavigationBar.php';
+}
 
 $searchErr = '';
 $building = '';
@@ -47,7 +55,7 @@ if(isset($_POST['save'])) {
 ?>
 <html>
 <head>
-<title>A HUGE Welcome From Access For All</title>
+<title>A HUGE Welcome From Everybody Welcome</title>
 <link rel="stylesheet" href="bootstrap.css" crossorigin="anonymous">
 <!-- Optional theme -->
 <link rel="stylesheet" href="bootstrap-theme.css" crossorigin="anonymous">
@@ -68,10 +76,16 @@ if(isset($_POST['save'])) {
     <form class="form-vertical" action="#" method="post">
     <div class="column">
         <div class="form-group">
+<?php 
+/*
             <label class="control-label col-sm-4" for="email"><b>Search with keywords:</b>:</label>
             <div class="col-sm-4">
               <input type="text" class="form-control" name="search" placeholder="search here">
-            </div><br/>
+            </div>
+*/
+
+?>
+            <br/>
 
             <div class="col-md-4">
               <label for="Business-type">Business Type</label>
@@ -86,7 +100,7 @@ if(isset($_POST['save'])) {
 
 
             <div class="col-md-4">
-              <label for="disability-type">Disability Type</label>
+              <label for="disability-type">Needs</label>
               <select class="form-select" name="search2">
                 <option value="">All</option>
                 <option value="hearing">Hearing</option>

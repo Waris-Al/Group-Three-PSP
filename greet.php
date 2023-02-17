@@ -1,13 +1,21 @@
 <?php
 session_start();
-include("NavigationBar.php");
+
+
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+  // display the navbar with the logout link
+  include 'NavbarLoggedin.php';
+} else {
+  // display the default navbar
+  include 'NavigationBar.php';
+}
 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-  <title>A HUGE Welcome From Access For All</title>
+  <title>A HUGE Welcome From Everybody Welcome</title>
   <style>
     /* Add styles for a visually appealing homepage */
     body {
@@ -33,7 +41,7 @@ include("NavigationBar.php");
   </style>
 </head>
 <body>
-  <h1>Your Registration submitted successs</h1>
+  <h1>You've successfully registered</h1>
   <?php 
   $type = $_GET['company']; ?>
   

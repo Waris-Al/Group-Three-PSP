@@ -2,6 +2,7 @@
     session_start();
     session_unset();
     session_destroy();
+    include ("NavigationBar.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,3 +39,5 @@
             
     </body>
 </html>
+
+<?php include("Footer.php"); ?>

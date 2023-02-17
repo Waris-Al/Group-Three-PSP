@@ -5,7 +5,7 @@ include("NavigationBar.php");
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Welcome to Access For All</title>
+  <title>Welcome to Everybody Welcome</title>
   <style>
     /* Add styles for a visually appealing homepage */
     body {
@@ -77,7 +77,7 @@ p {
   </style>
 </head>
 <body>
-  <h1>Welcome to Access For All</h1>
+  <h1>Welcome to Everybody Welcome</h1>
   <p>We are committed to creating a welcoming environment for everyone, including those with accessibility needs. Join our community today and start exploring!</p>
 
   <!-- Add more content here -->

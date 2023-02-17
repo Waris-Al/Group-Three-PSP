@@ -7,7 +7,7 @@ include("NavigationBar.php");
 <!DOCTYPE html>
 <html>
 <head>
-  <title>A HUGE Welcome From Access For All</title>
+  <title>A HUGE Welcome From Everybody Welcome</title>
   <style>
     /* Add styles for a visually appealing homepage */
     body {
@@ -33,7 +33,7 @@ include("NavigationBar.php");
   </style>
 </head>
 <body>
-  <h1>You are Already Registered with given email!</h1>
+  <h1>This email has already been registered</h1>
   
   <a href="logout.php" class="btn">Log out</a> 
 
