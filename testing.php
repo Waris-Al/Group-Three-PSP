@@ -31,6 +31,45 @@ $amountOfQuestions=10;
     .progress-bar {
       height: 100%;
     }
+
+    label {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 17px;
+  height: 17px;
+  border: 1px solid black;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+input[type="radio"][value="yes"]:checked {
+  background-color: #319C01;
+  border-color: black;
+  color: #319C01;
+}
+
+input[type="radio"][value="no"]:checked {
+  background-color: #D40000;
+  border-color: black;
+  color: #D40000;
+}
+
+
+.submit-container {
+        text-align: left;
+        margin-left: 695px;
+    }
+    
+    .submit-button {
+        margin-top: 10px;
+    }
+
   </style>
 
 
@@ -68,14 +107,20 @@ $question = $row['Question'];
 $idYes = $questionNo . "-yes";
 $idNo = $questionNo . "-no";
 ?>
-<label for="<?php echo $idYes ?>"><?php echo $question ?></label>
-<input type='radio' id='<?php echo $idYes ?>' name='<?php echo $questionNo ?>' value='yes'>Yes<input type='radio' id='<?php echo $idNo ?>' name='<?php echo $questionNo ?>' value='no'>No
-</li>
+<label for="<?php echo $idYes ?>" style="display: inline-block; width: 43%;"><?php echo $question ?></label>
+
+<div style="display: inline-block; text-align: left;">
+    <input type='radio' id='<?php echo $idYes ?>' name='<?php echo $questionNo ?>' value='yes' style="display: inline-block;">Yes
+    <input type='radio' id='<?php echo $idNo ?>' name='<?php echo $questionNo ?>' value='no' style="display: inline-block;">No
+</div>
   
 <?php endforeach;?>
+<br>
 <input type="hidden" name="totalQuestions" value="<?php echo $totalQ ?>">
     <input type="hidden" name="company" value="<?php echo $_GET['company'] ?>">
+    <div class="submit-container">
     <input type="submit" id="submit-btn" value="Submit" name="Submit">
+</div>
   </form>
 
 
@@ -118,3 +163,5 @@ document.querySelector('input[name="totalQuestions"]').value = <?php echo $total
 </html>
 
 <?php include("Footer.php");?>
+
+
