@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
   // display the navbar with the logout link
   include 'NavbarLoggedin.php';
@@ -43,9 +42,10 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 <body>
   <h1>You've successfully registered</h1>
   <?php 
-  $type = $_GET['company']; ?>
+  $comname = $_GET['company']; 
+  $type = $_GET['type']; ?>
   
-  <a href="testing.php?company=<?php echo $type?>" class="btn">Proceed to the Audit</a>
+  <a href="testing.php?company=<?php echo $comname?>&type=<?php echo $type ?>" class="btn">Proceed to the Audit</a>
 
 
 

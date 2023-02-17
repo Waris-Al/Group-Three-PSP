@@ -1,8 +1,27 @@
 <?php
 session_start(); // start the session
+  
+function getQNos() {
+  $email = $_GET['company'];
+  $db = new SQLite3('ActionPoints.db');
+  $stmt = $db->prepare("SELECT cname, btype FROM company WHERE email = '$email'");
+  $result = $stmt->execute();
+
+  $arrayResult = [];
+  while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+      $arrayResult = $row;
+  }
+  return $arrayResult;
+}
+$result = getQNos();
+$_SESSION['cname'] = $result['cname'];
+$_SESSION['btype'] = $result['btype'];
+
+$test = $result['cname'];
+$test2 = $result['btype'];
+
+
 $_SESSION['loggedin'] = true; // set the 'loggedin' variable to true
-$_SESSION['company'];
-$_SESSION['cname'];
 
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
   // display the navbar with the logout link
@@ -45,28 +64,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
   <h1>Your have successfully Logged In!</h1>
   
   <a href="CheckVenue.php" class="btn">Proceed to Check the Venue</a> 
-  
-  <?php 
-  
-  function getQNos() {
-    $email = $_GET['company'];
-    $db = new SQLite3('ActionPoints.db');
-    $stmt = $db->prepare("SELECT cname, btype FROM company WHERE email = '$email'");
-    $result = $stmt->execute();
 
-    $arrayResult = [];
-    while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-        $arrayResult = $row;
-    }
-    return $arrayResult;
-}
-
-$result = getQNos();
-$test = $result['cname'];
-$test2 = $result['btype'];
-
-  
-  ?>
 
   <a href="testing.php?company=<?php echo $test?>&type=<?php echo $test2 ?>" class="btn">Proceed to Audit</a> 
 

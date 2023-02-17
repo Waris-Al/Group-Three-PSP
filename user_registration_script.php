@@ -24,8 +24,12 @@
         echo "User successfully registered";
         $_SESSION['email'] = $email;
         $_SESSION['id'] = $db->lastInsertRowID(); 
-        header("Location: greet.php?company=$cname");
+        header("Location: greet.php?company=$cname&type=$company");
     } else {
         die("Registration failed");
     }
+
+    $_SESSION['loggedin'] = true;
+    $_SESSION['cname'] = $cname;
+    $_SESSION['btype'] = $company;
     ?>

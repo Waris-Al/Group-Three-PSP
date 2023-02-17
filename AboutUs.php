@@ -1,4 +1,13 @@
-<?php include("NavigationBar.php"); ?>
+<?php
+session_start();
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+  // display the navbar with the logout link
+  include 'NavbarLoggedin.php';
+} else {
+  // display the default navbar
+  include 'NavigationBar.php';
+}
+?>
 
 
 <!DOCTYPE html>
