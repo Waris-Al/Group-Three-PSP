@@ -3,9 +3,11 @@ session_start();
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
   // display the navbar with the logout link
   include 'NavbarLoggedin.php';
+  $welcomemessage = "Welcome back";
 } else {
   // display the default navbar
   include 'NavigationBar.php';
+  $welcomemessage = "Welcome to Everybody Welcome";
 }
 ?>
 <!DOCTYPE html>
@@ -83,7 +85,7 @@ p {
   </style>
 </head>
 <body>
-  <h1>Welcome to Everybody Welcome</h1>
+  <h1><?php echo $welcomemessage ?></h1>
   <p>We are committed to creating a welcoming environment for everyone, including those with accessibility needs. Join our community today and start exploring!</p>
 
   <!-- Add more content here -->
