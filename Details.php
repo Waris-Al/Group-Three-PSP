@@ -3,7 +3,7 @@
 <?php
 //require 'connection.php';
 session_start();
-    if(isset($_SESSION['email'])){
+    if(isset($_SESSION['loggedin'])){
         header('location: AlreadyAdd.php');
     }
 include("NavigationBar.php") 

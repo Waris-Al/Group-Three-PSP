@@ -13,10 +13,11 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Welcome to Everybody Welcome</title>
+  <title>Welcome to Access For All</title>
   <style>
     /* Add styles for a visually appealing homepage */
     body {
+    
   font-family: Arial, sans-serif;
   text-align: center;
   background-color: #f2f2f2;
@@ -85,7 +86,7 @@ p {
   </style>
 </head>
 <body>
-  <h1><?php echo $welcomemessage ?></h1>
+  <h1>A BIG Hello From Everybody Welcome!</h1>
   <p>We are committed to creating a welcoming environment for everyone, including those with accessibility needs. Join our community today and start exploring!</p>
 
   <!-- Add more content here -->
@@ -115,7 +116,7 @@ p {
     <img src="https://images.pexels.com/photos/4063789/pexels-photo-4063789.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Raising Awareness">
     <h3>Raising Awareness</h3>
     <p>Help us promote accessibility and inclusivity by joining us on our journey to an open, more accessible world. Together, we can make a difference.</p>
-    <a href="AboutUs.php" class="btn">About us</a>
+    <a href="Aboutus.php" class="btn">About us</a>
   </div>
 </div>
 <style>
