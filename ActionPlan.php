@@ -88,7 +88,7 @@ $pdf->Output('F', $report);
 
 echo "\nYour overall Accessibility Score is $totalPercent %";
   /*
-  //C:\xampp\htdocs\Group-Three-PSP-
+  //C:\xampp\htdocs\Group-Three-PSP-test
   */
 ?>
   
