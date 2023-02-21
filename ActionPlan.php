@@ -18,7 +18,8 @@ function getQNos()
 $NumberOfQs = substr((getQNos())[0]['QuestionNo'], 1);
 
 
-$pointsToImprove = "";
+$pointsToImprove = "Action Points \n";
+$goodPoints = "";
 $NumberOfImprovemenets = 0;
 $totalQuestions = $_GET['totalQuestions'];
 $db = new SQLite3('ActionPoints.db');
@@ -43,8 +44,7 @@ $NumberOfImprovemenets++;
     $pointsToImprove.= "-" . $value['ActionPoint'] . "\n";
 }
 }
-/*
-else 
+else if (isset($_GET["$QuestionInDB"]))
 {
   $stmt = $db->prepare("SELECT GoodPoint FROM Checklist WHERE QuestionNo = '$QuestionInDB'");
   $result = $stmt->execute();
@@ -57,26 +57,25 @@ else
 
   foreach ($rows_array as $value)
 {
-    $pointsToImprove.= "-" . $value['ActionPoint'] . "\n";
+    $goodPoints.= "-" . $value['GoodPoint'] . "\n";
 }
 //make this its own function that gets called in the else statement
 //then when you go through the results adding all the info to its own table
 }
-*/
-}
 
+}
 
 $totalPercent = (100-($NumberOfImprovemenets/$totalQuestions)*100);
 $totalPercent = round($totalPercent, 1);
-
-$pointsToImprove.="\nYour overall Accessibility Score is $totalPercent %";
-
+$pointsToImprove .= "\nGood points \n $goodPoints";
+$pointsToImprove .= "\nYour overall Accessibility Score is $totalPercent %";
+$report = $_GET['company'] . ".pdf";
 $pdf=new PDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial','',10);
-$txt=$pdf->MultiCell(100,5,$pointsToImprove,0,'J',0,$totalQuestions);
+$pdf->Write(5, $pointsToImprove); // Use Write() instead of MultiCell() and set a height of 5
+$pdf->Ln(); // Add a blank line
 
-$report = $_GET['company'] . ".pdf";
 
 $qr_text = 'https://docs.google.com/document/d/1YOHMRAphILRjlTk7r0Getu9h2yKg3Rwp-D9OjCmFpRI/edit'; // change this to the text you want to encode in the QR code
 $qr_file = 'qr.png'; // specify the filename for the QR code image
