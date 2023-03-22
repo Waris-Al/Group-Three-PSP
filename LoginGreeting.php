@@ -1,24 +1,30 @@
 <?php
 session_start(); // start the session
   
-function getQNos() {
+function getCName() {
   $email = $_GET['company'];
-  $db = new SQLite3('ActionPoints.db');
-  $stmt = $db->prepare("SELECT cname, btype FROM company WHERE email = '$email'");
-  $result = $stmt->execute();
-
-  $arrayResult = [];
-  while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-      $arrayResult = $row;
-  }
-  return $arrayResult;
+  $db = new PDO("sqlsrv:server = tcp:access4all.database.windows.net,1433; Database = ActionPoints", "groupthreeadmin", "%Pa55w0rd");
+  $stmt = $db->prepare("SELECT cname FROM company WHERE email = '$email'");
+  $stmt->execute();
+  $cname = $stmt->fetchColumn();
+  return $cname;
 }
-$result = getQNos();
-$_SESSION['cname'] = $result['cname'];
-$_SESSION['btype'] = $result['btype'];
 
-$test = $result['cname'];
-$test2 = $result['btype'];
+function getBType() {
+  $email = $_GET['company'];
+  $db = new PDO("sqlsrv:server = tcp:access4all.database.windows.net,1433; Database = ActionPoints", "groupthreeadmin", "%Pa55w0rd");
+  $stmt = $db->prepare("SELECT btype FROM company WHERE email = '$email'");
+  $stmt->execute();
+  $btype = $stmt->fetchColumn();
+  return $btype;
+}
+
+
+$test = getCName();
+$test2 = getBType();
+
+$_SESSION['company'] = $test;
+$_SESSION['type'] = $test2;
 
 
 $_SESSION['loggedin'] = true; // set the 'loggedin' variable to true
@@ -37,7 +43,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 <head>
   <title>A HUGE Welcome From Everybody Welcome</title>
   <style>
-    /* Add styles for a visually appealing homepage */
+    /* Add styles for a visually appealing index */
     body {
       font-family: Arial, sans-serif;
       text-align: center;
@@ -61,7 +67,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
   </style>
 </head>
 <body>
-  <h1>Your have successfully Logged In!</h1>
+  <h1>Your have successfully Logged In! sonic</h1>
   
   <a href="CheckVenue.php" class="btn">Proceed to Check the Venue</a> 
 
@@ -71,6 +77,9 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 
 
 <?php
-require("Footer.php");?>
+require("Footer.php");
 
 
+//thewar786vids@gmail.com
+
+?>

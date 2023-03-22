@@ -16,7 +16,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 <head>
   <title>A HUGE Welcome From Everybody Welcome</title>
   <style>
-    /* Add styles for a visually appealing homepage */
+    /* Add styles for a visually appealing index */
     body {
       font-family: Arial, sans-serif;
       text-align: center;

@@ -4,15 +4,18 @@ function getInfo()
 {
 $questionNo = $_GET['questionNo'];
 
-    $db = new SQLite3('ActionPoints.db');
+    
+  $db = new PDO("sqlsrv:server = tcp:access4all.database.windows.net,1433; Database = ActionPoints", "groupthreeadmin", "%Pa55w0rd");
+
     $stmt = $db->prepare("SELECT * FROM Checklist WHERE QuestionNo = '$questionNo'");
     $result = $stmt->execute();
     
-    $arrayResult = [];//prepare an empty array first
-    while ($row = $result->fetchArray()){ // use fetchArray(SQLITE3_NUM) - another approach
-        $arrayResult [] = $row; //adding a record until end of records
-    }
-    return $arrayResult;
+  $arrayResult = [];
+  $rows = $stmt->fetchAll();
+  foreach ($rows as $row) {
+      $arrayResult[] = $row;
+  }
+  return $arrayResult;
 }
 $nameErr = $invalidMesg = "";
 /*UPDATE Checklist
@@ -29,7 +32,9 @@ if (isset($_POST['submit'])) {
         $questionNo = $_GET['questionNo'];
         $updater = $_POST['username'];
         $col = $_POST['updating'];
-        $db = new SQLite3('ActionPoints.db');
+        
+  $db = new PDO("sqlsrv:server = tcp:access4all.database.windows.net,1433; Database = ActionPoints", "groupthreeadmin", "%Pa55w0rd");
+  
         $stmt = $db->prepare("UPDATE Checklist SET $col = '$updater' WHERE QuestionNo = '$questionNo'");
         $result = $stmt->execute();
     }
@@ -37,7 +42,9 @@ if (isset($_POST['submit'])) {
     if($_POST['updating'] == "Delete")
     {
         $questionNo = $_GET['questionNo'];
-        $db = new SQLite3('ActionPoints.db');
+        
+  $db = new PDO("sqlsrv:server = tcp:access4all.database.windows.net,1433; Database = ActionPoints", "groupthreeadmin", "%Pa55w0rd");
+  
         $stmt = $db->prepare("DELETE FROM Checklist WHERE QuestionNo = '$questionNo'");
         $result = $stmt->execute();
     }
@@ -91,7 +98,7 @@ instead adding a new question closer to how you want it to look. <br>
                         <span style="color: red"><?php echo $nameErr; ?></span>
 
                    <div class="form-group col-md-4">
-                        <input class="btn btn-primary" type="submit" value="submit" name ="submit">
+                        <input class="btn btn-primary" type="submit" value="Add" name ="submit">
                    </div>
                         </form>
 <br>

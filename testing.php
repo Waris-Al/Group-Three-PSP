@@ -77,16 +77,14 @@ input[type="radio"][value="no"]:checked {
 function getQuestions()
 {
   $venueType = $_GET['type'];
-  $db = new SQLite3('ActionPoints.db');
-  $venueType = $db->escapeString($venueType);
-  $stmt = $db->prepare("SELECT QuestionNo, Question FROM Checklist WHERE (Venue = 'General' OR Venue = '$venueType')");
+  $db = new PDO("sqlsrv:server = tcp:access4all.database.windows.net,1433; Database = ActionPoints", "groupthreeadmin", "%Pa55w0rd");
+  $venueType = $db->quote($venueType);  
+  $stmt = $db->prepare("SELECT QuestionNo, Question, Venue FROM Checklist WHERE (CONVERT(varchar(255), Venue) = 'General' OR CONVERT(varchar(255), Venue) = $venueType)");
   $result = $stmt->execute();
-
-  
   $arrayResult = [];
-  while ($row = $result->fetchArray())
-  { 
-      $arrayResult [] = $row; 
+  $rows = $stmt->fetchAll();
+  foreach ($rows as $row) {
+      $arrayResult[] = $row;
   }
   return $arrayResult;
 }
@@ -134,28 +132,43 @@ $idNo = $questionNo . "-no";
     </div>
   </div>
   <script>
-    $(document).ready(function() {
-      $(':radio').change(function() {
-        var totalChecked = $(':radio:checked').length;
-        var percentage = (totalChecked / <?php echo $totalQ; ?>) * 100;
-        $('.progress-bar').css('width', percentage + '%');
-        $('.progress-bar').text(Math.round(percentage) + '%');
-        $('.progress-bar').attr('aria-valuenow', percentage);
-      });
-    });
+$(document).ready(function() {
 
-    $('#submit-btn').attr('disabled', true);
+// Check if there are any saved responses in the local storage
+for (var i = 1; i <= <?php echo $totalQ; ?>; i++) {
+  var response = localStorage.getItem("response_" + i);
+  if (response !== null) {
+    $("input[name=" + i + "][value=" + response + "]").prop("checked", true);
+  }
+}
 
 $(':radio').change(function() {
   var totalChecked = $(':radio:checked').length;
-  if (totalChecked == <?php echo $totalQ; ?>) {
-    $('#submit-btn').attr('disabled', false);
-    
-document.querySelector('input[name="totalQuestions"]').value = <?php echo $totalQ; ?>;
-  } else {
-    $('#submit-btn').attr('disabled', true);
-  }
+  var percentage = (totalChecked / <?php echo $totalQ; ?>) * 100;
+  $('.progress-bar').css('width', percentage + '%');
+  $('.progress-bar').text(Math.round(percentage) + '%');
+  $('.progress-bar').attr('aria-valuenow', percentage);
+
+  // Store the response in the local storage
+  var questionNo = $(this).attr("name");
+  var response = $(this).val();
+  localStorage.setItem("response_" + questionNo, response);
 });
+});
+
+// Disable the submit button if not all questions have been answered
+$('#submit-btn').attr('disabled', true);
+
+$(':radio').change(function() {
+var totalChecked = $(':radio:checked').length;
+if (totalChecked == <?php echo $totalQ; ?>) {
+  $('#submit-btn').attr('disabled', false);
+  document.querySelector('input[name="totalQuestions"]').value = <?php echo $totalQ; ?>;
+} else {
+  $('#submit-btn').attr('disabled', true);
+}
+});
+
 
 
   </script>

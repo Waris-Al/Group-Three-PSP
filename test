@@ -1,0 +1,27 @@
+
+INSERT INTO Checklist ("QuestionNo", "Question", "ActionPoint", "Venue", "Type", "GoodPoint")
+VALUES ('Q2', 'Are the food storage areas clean?', 'Sanitize and organize the area', 'restaurant', 'Cleaning', 'Clean food storage areas improve food safety.');
+
+INSERT INTO Checklist ("QuestionNo", "Question", "ActionPoint", "Venue", "Type", "GoodPoint")
+VALUES ('Q3', 'Are all machines working properly?', 'Schedule repairs as necessary', 'gym', 'Maintenance', 'Properly functioning machines reduce the risk of injury.');
+
+INSERT INTO Checklist ("QuestionNo", "Question", "ActionPoint", "Venue", "Type", "GoodPoint")
+VALUES ('Q4', 'Are all windows and doors locked?', 'Secure all entrances', 'General', 'Security', 'Securing windows and doors reduces the risk of theft or unauthorized access.');
+
+INSERT INTO Checklist ("QuestionNo", "Question", "ActionPoint", "Venue", "Type", "GoodPoint")
+VALUES ('Q5', 'Are the bathrooms clean?', 'Clean and restock supplies', 'cinema', 'Cleaning', 'Clean bathrooms improve customer satisfaction.');
+
+INSERT INTO Checklist ("QuestionNo", "Question", "ActionPoint", "Venue", "Type", "GoodPoint")
+VALUES ('Q6', 'Is the music at an appropriate volume?', 'Adjust volume as necessary', 'restaurant', 'Atmosphere', 'Appropriate music volume enhances the dining experience.');
+
+INSERT INTO Checklist ("QuestionNo", "Question", "ActionPoint", "Venue", "Type", "GoodPoint")
+VALUES ('Q7', 'Are all light fixtures working?', 'Replace any bulbs as necessary', 'General', 'Maintenance', 'Properly functioning lights improve safety and visibility.');
+
+INSERT INTO Checklist ("QuestionNo", "Question", "ActionPoint", "Venue", "Type", "GoodPoint")
+VALUES ('Q8', 'Are all kitchen surfaces sanitized?', 'Clean and sanitize all surfaces', 'restaurant', 'Cleaning', 'Clean kitchen surfaces reduce the risk of foodborne illness.');
+
+INSERT INTO Checklist ("QuestionNo", "Question", "ActionPoint", "Venue", "Type", "GoodPoint")
+VALUES ('Q9', 'Are all emergency exit signs visible?', 'Replace any signs that are missing or damaged', 'General', 'Safety', 'Visible emergency exit signs improve safety in emergencies.');
+
+INSERT INTO Checklist ("QuestionNo", "Question", "ActionPoint", "Venue", "Type", "GoodPoint")
+VALUES ('Q10', 'Are all weights properly stored?', 'Organize and secure all weights', 'gym', 'Safety', 'Properly stored weights reduce the risk of injury.');

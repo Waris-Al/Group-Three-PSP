@@ -1,28 +1,26 @@
 <?php
 include 'phpqrcode/qrlib.php';
 require('fpdf/multicellmax.php');
+require_once('fpdf/fpdf.php');
 
 function getQNos()
 {
-  $db = new SQLite3('ActionPoints.db');
-  $stmt = $db->prepare("SELECT * FROM Checklist WHERE QuestionNo LIKE 'Q%' ORDER BY CAST(SUBSTR(QuestionNo, 2) AS UNSIGNED) DESC LIMIT 1");
-  $result = $stmt->execute();
-  
-  $arrayResult = [];
-  while ($row = $result->fetchArray())
-  {
-      $arrayResult [] = $row;
-  }
-  return $arrayResult;
+  $db = new PDO("sqlsrv:server = tcp:access4all.database.windows.net,1433; Database = ActionPoints", "groupthreeadmin", "%Pa55w0rd");
+  $stmt = $db->prepare("SELECT COUNT(*) AS NumQs FROM Checklist");
+  $stmt->execute();
+  $result = $stmt->fetch(PDO::FETCH_ASSOC);
+  return $result['NumQs'];
 }
-$NumberOfQs = substr((getQNos())[0]['QuestionNo'], 1);
+
+$NumberOfQs = getQNos();
+
 
 
 $pointsToImprove = "Action Points \n";
 $goodPoints = "";
 $NumberOfImprovemenets = 0;
 $totalQuestions = $_GET['totalQuestions'];
-$db = new SQLite3('ActionPoints.db');
+$db = new PDO("sqlsrv:server = tcp:access4all.database.windows.net,1433; Database = ActionPoints", "groupthreeadmin", "%Pa55w0rd");
 for ($i=1; $i <= $NumberOfQs; $i++)
 {
 $QuestionInDB = "Q" . strval($i);
@@ -32,14 +30,13 @@ $NumberOfImprovemenets++;
   $stmt = $db->prepare("SELECT ActionPoint FROM Checklist WHERE QuestionNo = '$QuestionInDB'");
   $result = $stmt->execute();
 
-
-  $rows_array = [];
-  while ($row=$result->fetchArray())
-  {
-      $rows_array[]=$row;
+  $arrayResult = [];
+  $rows = $stmt->fetchAll();
+  foreach ($rows as $row) {
+      $arrayResult[] = $row;
   }
 
-  foreach ($rows_array as $value)
+  foreach ($arrayResult as $value)
 {
     $pointsToImprove.= "-" . $value['ActionPoint'] . "\n";
 }
@@ -49,13 +46,13 @@ else if (isset($_GET["$QuestionInDB"]))
   $stmt = $db->prepare("SELECT GoodPoint FROM Checklist WHERE QuestionNo = '$QuestionInDB'");
   $result = $stmt->execute();
 
-    $rows_array = [];
-  while ($row=$result->fetchArray())
-  {
-      $rows_array[]=$row;
+  $arrayResult = [];
+  $rows = $stmt->fetchAll();
+  foreach ($rows as $row) {
+      $arrayResult[] = $row;
   }
 
-  foreach ($rows_array as $value)
+  foreach ($arrayResult as $value)
 {
     $goodPoints.= "-" . $value['GoodPoint'] . "\n";
 }
@@ -64,6 +61,8 @@ else if (isset($_GET["$QuestionInDB"]))
 }
 
 }
+
+
 
 $totalPercent = (100-($NumberOfImprovemenets/$totalQuestions)*100);
 $totalPercent = round($totalPercent, 1);
@@ -77,9 +76,30 @@ $pdf->Write(5, $pointsToImprove); // Use Write() instead of MultiCell() and set 
 $pdf->Ln(); // Add a blank line
 
 
-$qr_text = 'https://docs.google.com/document/d/1YOHMRAphILRjlTk7r0Getu9h2yKg3Rwp-D9OjCmFpRI/edit'; // change this to the text you want to encode in the QR code
+/*undo till this is left
+$qr_text = 'https://youtu.be/LfdCMBCt2r4'; // change this to the text you want to encode in the QR code
 $qr_file = 'qr.png'; // specify the filename for the QR code image
 $pdf->Image($qr_file);
+*/
+
+// Generate the QR code image and store it in a temporary file
+$file_location = "https://everyonewelcome2.azurewebsites.net/" . $report;
+$qrtext = "$file_location";
+$temp_file = tempnam(sys_get_temp_dir(), 'qr_');
+QRcode::png($qrtext, $temp_file, QR_ECLEVEL_Q, 10);
+$page_height = $pdf->GetPageHeight();
+
+// Set the distance from the bottom of the page
+$distance_from_bottom = 50;
+
+// Calculate the Y coordinate of the image
+$image_y = $page_height - $distance_from_bottom - 50; // 50 is the height of the image
+
+// Display the image
+$pdf->Image($temp_file, 50, $image_y, 50, 50, 'PNG');
+
+// Delete the temporary file
+unlink($temp_file);
 
 
 $pdf->Output();

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST["email"];
+    $username = $_POST["username"];
     $password = $_POST["password"];
 
     // Connect to database using PDO
@@ -12,8 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Prepare and execute the query using bound parameters
-        $stmt = $conn->prepare("SELECT id, email, btype FROM company WHERE email=:email AND pass=:password");
-        $stmt->bindParam(':email', $email);
+        $stmt = $conn->prepare("SELECT username, password FROM Admin WHERE username=:username AND password=:password");
+        $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $password);
         $stmt->execute();
 
@@ -22,12 +22,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!$result) {
             // Invalid login, redirect to login page with error message
             $_SESSION['error_message'] = "Wrong username or password";
-            header("Location: login.php");
+            header("Location: AdminLogin.php");
             exit();
         } else {
             // Valid login, set session variables and redirect to greeting page
             $_SESSION['id'] = $result['id'];
-            header("Location: LoginGreeting.php?company=$email");
+            header("Location: QuestionUpdater.php");
             exit();
         }
 

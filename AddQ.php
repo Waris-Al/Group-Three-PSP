@@ -3,13 +3,14 @@
 <?php 
 function getQs()
 {
-  $db = new SQLite3('ActionPoints.db');
-  $stmt = $db->prepare("SELECT * FROM Checklist WHERE QuestionNo LIKE 'Q%' ORDER BY CAST(SUBSTR(QuestionNo, 2) AS UNSIGNED) DESC LIMIT 1");
+  $db = new PDO("sqlsrv:server = tcp:access4all.database.windows.net,1433; Database = ActionPoints", "groupthreeadmin", "%Pa55w0rd");
+  $stmt = $db->prepare("SELECT TOP 1 * FROM Checklist WHERE QuestionNo LIKE 'Q%' ORDER BY CAST(SUBSTRING(QuestionNo, 2, LEN(QuestionNo)) AS INT) DESC");
   $result = $stmt->execute();
   
-  $arrayResult = [];//prepare an empty array first
-  while ($row = $result->fetchArray()){ // use fetchArray(SQLITE3_NUM) - another approach
-      $arrayResult [] = $row; //adding a record until end of records
+  $arrayResult = [];
+  $rows = $stmt->fetchAll();
+  foreach ($rows as $row) {
+      $arrayResult[] = $row;
   }
   return $arrayResult;
 }
@@ -38,10 +39,12 @@ if (isset($_POST['submit'])) {
     {
         $quest = $_POST['username'];
         $point = $_POST['password'];
-        $ven = $_POST['venue'];
-        $db = new SQLite3('ActionPoints.db');
+        $ven = $_POST['venue']; 
+        $db = new PDO("sqlsrv:server = tcp:access4all.database.windows.net,1433; Database = ActionPoints", "groupthreeadmin", "%Pa55w0rd");
         $stmt = $db->prepare("INSERT INTO Checklist (QuestionNo, Question, ActionPoint, Venue) VALUES ('$lastQ', '$quest', '$point', '$ven')");
         $result = $stmt->execute();
+        header("Location: QuestionUpdater.php");
+        
     }
 }
 ?>
@@ -54,7 +57,7 @@ if (isset($_POST['submit'])) {
                    </div>
 
                    <div class="form-group col-md-6">
-                        <label class="control-label labelFont">Action point</label>
+                        <label class="control-label labelFont">Action point <a title="The way for the business to improve (e.g. 'Add subtitled screenings')"><img src="https://shots.jotform.com/kade/Screenshots/blue_question_mark.png" height="13px"/></a></label>
                         <input class="form-control" type="text" name = "password">
                         <span style="color: red"><?php echo $pwderr; ?></span>
                    </div>

@@ -24,13 +24,13 @@
       <div class="collapse navbar-collapse" id="navbarsExample02">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="Homepage.php">Home</a>
+            <a class="nav-link" href="index.php">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="CheckVenue.php">Check a Location</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="testing.php?company=<?php echo $_SESSION['cname'] ?>&type=<?php echo $_SESSION['btype'] ?>">Audit</a>
+            <a class="nav-link" href="testing.php?company=<?php echo $_SESSION['company'] ?>&type=<?php echo $_SESSION['type'] ?>">Audit</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="AboutUs.php">About Us</a>

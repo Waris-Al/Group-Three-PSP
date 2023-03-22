@@ -69,11 +69,11 @@ session_start();
     <form action="loginC.php" method="POST" autocomplete="off">
       <div class="form-group">
         <label class="form-label" for="Username1">Email</label>
-        <input type="username" id="Username1" class="form-control" name="email">
+        <input type="username" id="Username1" class="form-control" name="email" required>
       </div>
       <div class="form-group">
         <label class="form-label" for="Password1">Password</label>
-        <input type="password" id="Password1" class="form-control" name="password">
+        <input type="password" id="Password1" class="form-control" name="password" required>
       </div>
       <div class="form-group form-check">
         <input type="checkbox" class="form-check-input" id="loginCheck">

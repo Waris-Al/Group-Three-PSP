@@ -16,7 +16,7 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
 <head>
   <title>A HUGE Welcome From Everybody Welcome</title>
   <style>
-    /* Add styles for a visually appealing homepage */
+    /* Add styles for a visually appealing index */
     body {
       font-family: Arial, sans-serif;
       text-align: center;
@@ -43,8 +43,13 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
   <h1>You've successfully registered</h1>
   <?php 
   $comname = $_GET['company']; 
-  $type = $_GET['type']; ?>
-  
+  $type = $_GET['type']; 
+
+
+$_SESSION['company'] = $comname;
+$_SESSION['type'] = $type;
+
+?>
   <a href="testing.php?company=<?php echo $comname?>&type=<?php echo $type ?>" class="btn">Proceed to the Audit</a>
 
 
